@@ -4,23 +4,29 @@
 
 ## About the Project
 
-This project looks at the Titanic passenger dataset using Python. The aim is to understand the data, find patterns in passenger survival, and later explore which passenger characteristics were linked to survival.
+This project looks at the Titanic passenger dataset using Python. The goal is to understand the data, clean it, and explore patterns in passenger survival.
 
-The project will cover data cleaning, feature engineering, exploratory data analysis, and basic statistical analysis.
+The analysis covers data profiling, data cleaning, feature engineering, exploratory data analysis, and basic statistical analysis.
 
 ## Current Progress
 
 So far, the project includes:
 
 - Loading the Titanic training and test datasets
-- Checking the shape and columns of each dataset
+- Checking the shape and columns of both datasets
 - Reviewing data types and basic dataset information
 - Checking summary statistics
 - Checking categorical variables
 - Checking missing values and their percentages
 - Checking for duplicate rows
 - Looking at the survival distribution
-- Reviewing basic statistics for numerical variables such as Age, Fare, SibSp, and Parch
+- Reviewing basic statistics for `Age`, `Fare`, `SibSp`, and `Parch`
+- Filling missing `Age` values with the median
+- Creating a `CabinKnown` flag for missing cabin information
+- Filling missing `Embarked` values with the mode
+- Checking data types after cleaning
+- Checking for duplicate rows again
+- Performing a final missing-value check
 
 More analysis will be added as the project progresses.
 
@@ -56,7 +62,7 @@ pip install pandas numpy matplotlib seaborn jupyter
 jupyter notebook
 ```
 
-Open the Titanic analysis notebook and run the cells from top to bottom.
+Open `Titanic_EDA.ipynb` and run the cells from top to bottom.
 
 ## Tech Stack
 
@@ -90,7 +96,7 @@ A screenshot of the final analysis will be added here once the visualizations ar
 
 ## Results
 
-The final results and key findings will be added after the data cleaning, feature engineering, and EDA are completed.
+The final results and key findings will be added after the exploratory analysis and visualizations are completed.
 
 ## Author
 
