@@ -4,7 +4,7 @@
 
 ## About the Project
 
-This project looks at the Titanic passenger dataset using Python. The goal is to understand the data, clean it, and explore patterns in passenger survival.
+This project looks at the Titanic passenger dataset using Python. The goal is to understand the data, clean it, and create useful features that can be used to explore patterns in passenger survival.
 
 The analysis covers data profiling, data cleaning, feature engineering, exploratory data analysis, and basic statistical analysis.
 
@@ -27,8 +27,64 @@ So far, the project includes:
 - Checking data types after cleaning
 - Checking for duplicate rows again
 - Performing a final missing-value check
+- Extracting passenger `Title` from the `Name` column
+- Creating `FamilySize` from `SibSp` and `Parch`
+- Creating an `IsAlone` indicator from `FamilySize`
+- Checking the new features and their data types
 
 More analysis will be added as the project progresses.
+
+## Data Cleaning
+
+The dataset was checked for missing values, duplicate records, and data types.
+
+The following steps were taken:
+
+- Missing `Age` values were filled using the median age.
+- Missing `Embarked` values were filled using the most common value.
+- A `CabinKnown` column was created to show whether cabin information was available.
+- The original `Cabin` column was kept because the missing values were not replaced with made-up cabin information.
+- Duplicate rows were checked and no complete duplicate records were found.
+- Data types were checked after cleaning to make sure they were suitable for the analysis.
+
+## Feature Engineering
+
+Three new features have been created so far.
+
+### Title
+
+The passenger title was extracted from the `Name` column.
+
+Examples include:
+
+- `Mr`
+- `Mrs`
+- `Miss`
+- `Master`
+- Other less common titles
+
+The `Title` feature can be used later to compare survival patterns between different passenger groups.
+
+### FamilySize
+
+`FamilySize` was created using:
+
+```python
+FamilySize = SibSp + Parch + 1
+```
+
+The `+1` represents the passenger themselves.
+
+### IsAlone
+
+`IsAlone` was created from `FamilySize`.
+
+```text
+1 = Passenger was travelling alone
+0 = Passenger was travelling with family
+```
+
+These features will be used later during the exploratory analysis.
 
 ## Dataset
 
