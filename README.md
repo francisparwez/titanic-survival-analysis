@@ -6,7 +6,7 @@
 
 This project looks at the Titanic passenger dataset using Python. The goal is to understand the data, clean it, create useful features, and explore patterns related to passenger survival.
 
-The project covers data profiling, data cleaning, feature engineering, exploratory data analysis, outlier analysis, and basic statistical analysis.
+The project covers data profiling, data cleaning, feature engineering, exploratory data analysis, outlier analysis, and data visualization.
 
 ## Current Progress
 
@@ -25,19 +25,19 @@ So far, the project includes:
 - Creating a `CabinKnown` flag for missing cabin information
 - Filling missing `Embarked` values with the mode
 - Checking data types after cleaning
-- Checking for duplicate rows again
+- Checking duplicate rows again
 - Performing a final missing-value check
 - Extracting passenger `Title` from the `Name` column
 - Creating `FamilySize` from `SibSp` and `Parch`
 - Creating an `IsAlone` indicator from `FamilySize`
-- Checking the new features and their data types
+- Checking the new features
 - Exploring the distributions of `Age`, `Fare`, and `Pclass`
 - Checking possible outliers in `Age` and `Fare`
 - Using the IQR method to flag possible outliers
 - Comparing survival rates by sex, passenger class, and family size
 - Creating a correlation heatmap
 - Comparing survival by both sex and passenger class
-- Saving all visualizations as PNG files in the `images` folder
+- Creating and saving 10 visualizations as PNG files
 
 ## Data Cleaning
 
@@ -49,8 +49,8 @@ The following steps were taken:
 - Missing `Embarked` values were filled using the most common value.
 - A `CabinKnown` column was created to show whether cabin information was available.
 - The original `Cabin` column was kept instead of filling missing cabin values with made-up information.
-- Duplicate rows were checked in both the training and test datasets. No complete duplicate rows were found.
-- Data types were checked after cleaning and no unnecessary type conversions were made.
+- Duplicate rows were checked in both datasets.
+- Data types were checked after cleaning.
 
 ## Feature Engineering
 
@@ -87,19 +87,17 @@ The `+1` represents the passenger themselves.
 0 = Passenger was travelling with family
 ```
 
-These features are used in the exploratory analysis to look for differences in survival.
-
 ## Exploratory Data Analysis
 
-The EDA is split into univariate, outlier, bivariate, and multivariate analysis.
+The EDA is divided into four parts.
 
 ### Univariate Analysis
 
-The following distributions were explored:
+The following variables were explored individually:
 
-- Passenger age
-- Passenger fare
-- Passenger class
+- `Age`
+- `Fare`
+- `Pclass`
 
 ### Outlier Analysis
 
@@ -117,51 +115,53 @@ Survival rates were compared by:
 
 ### Multivariate Analysis
 
-A correlation heatmap was created to look at relationships between the numerical variables.
+A correlation heatmap was created to look at relationships between numerical variables.
 
-A separate visualization also compares survival by both sex and passenger class.
+Another visualization compares survival by both sex and passenger class.
 
 ## Visualizations
 
-The notebook creates 10 visualizations. Each one is saved as a PNG file in the `images` folder.
+The notebook contains **10 visualizations**, which is above the required minimum of 8.
 
-### Age Distribution
+Each chart is saved as a PNG file in the `images` folder.
+
+### 1. Age Distribution
 
 ![Age Distribution](images/01_age_distribution.png)
 
-### Fare Distribution
+### 2. Fare Distribution
 
 ![Fare Distribution](images/02_fare_distribution.png)
 
-### Passengers by Class
+### 3. Passengers by Class
 
 ![Passengers by Class](images/03_passengers_by_class.png)
 
-### Age Boxplot
+### 4. Age Boxplot
 
 ![Age Boxplot](images/04_age_boxplot.png)
 
-### Fare Boxplot
+### 5. Fare Boxplot
 
 ![Fare Boxplot](images/05_fare_boxplot.png)
 
-### Survival Rate by Sex
+### 6. Survival Rate by Sex
 
 ![Survival Rate by Sex](images/06_survival_by_sex.png)
 
-### Survival Rate by Passenger Class
+### 7. Survival Rate by Passenger Class
 
 ![Survival Rate by Passenger Class](images/07_survival_by_class.png)
 
-### Survival Rate by Family Size
+### 8. Survival Rate by Family Size
 
 ![Survival Rate by Family Size](images/08_survival_by_family_size.png)
 
-### Correlation Heatmap
+### 9. Correlation Heatmap
 
 ![Correlation Heatmap](images/09_correlation_heatmap.png)
 
-### Survival Rate by Sex and Class
+### 10. Survival Rate by Sex and Class
 
 ![Survival Rate by Sex and Class](images/10_survival_by_sex_and_class.png)
 
@@ -199,7 +199,7 @@ jupyter notebook
 
 Open `Titanic_EDA.ipynb` and run the cells from top to bottom.
 
-The notebook automatically creates the `images` folder and saves each visualization as a PNG file when the visualization cells are run.
+The notebook creates the `images` folder and saves the visualizations as PNG files when the visualization cells are run.
 
 ## Tech Stack
 
@@ -239,9 +239,9 @@ Titanic-Survival-Analysis/
 
 ## Results
 
-The exploratory analysis and visualizations are now in place.
+The data cleaning, feature engineering, exploratory analysis, outlier checks, and visualizations are now in place.
 
-The final data-driven insights and conclusions about the main factors associated with passenger survival will be added after the remaining analysis is completed.
+The final data-driven insights and statistical conclusions will be added after the remaining analysis is completed.
 
 ## Author
 
