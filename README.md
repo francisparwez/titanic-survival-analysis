@@ -1,29 +1,37 @@
 # Titanic Survival Analysis
 
-> **Exploring the factors behind passenger survival using Python.**
+> Exploring the factors behind passenger survival using Python.
 
 ## About the Project
 
-This project is an end-to-end exploratory data analysis of the Titanic passenger dataset. The goal is to clean and understand the data, identify patterns in passenger survival, and explore how factors such as age, sex, passenger class, fare, and family size were associated with survival.
+This project looks at the Titanic passenger dataset using Python. The aim is to understand the data, find patterns in passenger survival, and later explore which passenger characteristics were linked to survival.
 
-The analysis covers the full EDA process, from initial data profiling and cleaning to feature engineering, visualization, and statistical analysis.
+The project will cover data cleaning, feature engineering, exploratory data analysis, and basic statistical analysis.
 
-## Key Features
+## Current Progress
 
-- Initial data profiling and quality checks
-- Handling missing values and duplicate records
-- Data type corrections and basic data cleaning
-- Feature engineering, including:
-  - Passenger titles
-  - Family size
-  - IsAlone indicator
+So far, the project includes:
 
-- Univariate analysis of key variables
-- Bivariate analysis of survival patterns
-- Multivariate analysis and correlation analysis
-- Statistical summaries and group-by analysis
-- 8+ visualizations using Matplotlib and Seaborn
-- Data-driven findings and conclusions
+- Loading the Titanic training and test datasets
+- Checking the shape and columns of each dataset
+- Reviewing data types and basic dataset information
+- Checking summary statistics
+- Checking categorical variables
+- Checking missing values and their percentages
+- Checking for duplicate rows
+- Looking at the survival distribution
+- Reviewing basic statistics for numerical variables such as Age, Fare, SibSp, and Parch
+
+More analysis will be added as the project progresses.
+
+## Dataset
+
+The project uses the Kaggle Titanic dataset, which is split into two files:
+
+- `train.csv` — Contains passenger information and the `Survived` target variable.
+- `test.csv` — Contains passenger information but does not include the `Survived` variable.
+
+The datasets are stored in the `data` folder.
 
 ## Getting Started
 
@@ -42,7 +50,7 @@ Make sure Python is installed, then run:
 pip install pandas numpy matplotlib seaborn jupyter
 ```
 
-### 3. Launch Jupyter Notebook
+### 3. Start Jupyter Notebook
 
 ```bash
 jupyter notebook
@@ -50,24 +58,15 @@ jupyter notebook
 
 Open the Titanic analysis notebook and run the cells from top to bottom.
 
-### 4. Dataset
-
-The project uses the Kaggle Titanic dataset, which is provided as two separate files:
-
-- `train.csv` — Contains passenger information along with the `Survived` target variable.
-- `test.csv` — Contains passenger information without the `Survived` variable.
-
-Both datasets are included in the `data` folder, so no additional download is required to reproduce the analysis.
-
 ## Tech Stack
 
 - **Python** — Main programming language
-- **Pandas** — Data cleaning, manipulation, and analysis
+- **Pandas** — Data cleaning and analysis
 - **NumPy** — Numerical operations
 - **Matplotlib** — Data visualization
 - **Seaborn** — Statistical visualization
 - **Jupyter Notebook** — Analysis and documentation
-- **Git & GitHub** — Version control and project sharing
+- **Git & GitHub** — Version control
 
 ## Project Structure
 
@@ -75,19 +74,23 @@ Both datasets are included in the `data` folder, so no additional download is re
 Titanic-Survival-Analysis/
 │
 ├── data/
-│   ├── test.csv
-│   └── train.csv
+│   ├── train.csv
+│   └── test.csv
 │
-├── README.md
+├── Titanic_EDA.ipynb
 │
-└── ...
+└── README.md
 ```
+
+## Project Preview
+
+A screenshot of the final analysis will be added here once the visualizations are completed.
+
+<!-- Screenshot will be added here later -->
 
 ## Results
 
-The final analysis will highlight the main factors associated with passenger survival and present the findings through statistical summaries and visualizations.
-
-More detailed findings will be added here once the analysis is complete.
+The final results and key findings will be added after the data cleaning, feature engineering, and EDA are completed.
 
 ## Author
 
