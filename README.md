@@ -4,9 +4,9 @@
 
 ## About the Project
 
-This project looks at the Titanic passenger dataset using Python. The goal is to understand the data, clean it, and create useful features that can be used to explore patterns in passenger survival.
+This project looks at the Titanic passenger dataset using Python. The goal is to understand the data, clean it, create useful features, and explore patterns related to passenger survival.
 
-The analysis covers data profiling, data cleaning, feature engineering, exploratory data analysis, and basic statistical analysis.
+The project covers data profiling, data cleaning, feature engineering, exploratory data analysis, outlier analysis, and basic statistical analysis.
 
 ## Current Progress
 
@@ -19,7 +19,7 @@ So far, the project includes:
 - Checking categorical variables
 - Checking missing values and their percentages
 - Checking for duplicate rows
-- Looking at the survival distribution
+- Reviewing the survival distribution
 - Reviewing basic statistics for `Age`, `Fare`, `SibSp`, and `Parch`
 - Filling missing `Age` values with the median
 - Creating a `CabinKnown` flag for missing cabin information
@@ -31,8 +31,13 @@ So far, the project includes:
 - Creating `FamilySize` from `SibSp` and `Parch`
 - Creating an `IsAlone` indicator from `FamilySize`
 - Checking the new features and their data types
-
-More analysis will be added as the project progresses.
+- Exploring the distributions of `Age`, `Fare`, and `Pclass`
+- Checking possible outliers in `Age` and `Fare`
+- Using the IQR method to flag possible outliers
+- Comparing survival rates by sex, passenger class, and family size
+- Creating a correlation heatmap
+- Comparing survival by both sex and passenger class
+- Saving all visualizations as PNG files in the `images` folder
 
 ## Data Cleaning
 
@@ -43,17 +48,17 @@ The following steps were taken:
 - Missing `Age` values were filled using the median age.
 - Missing `Embarked` values were filled using the most common value.
 - A `CabinKnown` column was created to show whether cabin information was available.
-- The original `Cabin` column was kept because the missing values were not replaced with made-up cabin information.
-- Duplicate rows were checked and no complete duplicate records were found.
-- Data types were checked after cleaning to make sure they were suitable for the analysis.
+- The original `Cabin` column was kept instead of filling missing cabin values with made-up information.
+- Duplicate rows were checked in both the training and test datasets. No complete duplicate rows were found.
+- Data types were checked after cleaning and no unnecessary type conversions were made.
 
 ## Feature Engineering
 
-Three new features have been created so far.
+Three new features were created from the existing passenger information.
 
 ### Title
 
-The passenger title was extracted from the `Name` column.
+The passenger title was extracted from the `Name` column and stored in a new `Title` column.
 
 Examples include:
 
@@ -62,8 +67,6 @@ Examples include:
 - `Miss`
 - `Master`
 - Other less common titles
-
-The `Title` feature can be used later to compare survival patterns between different passenger groups.
 
 ### FamilySize
 
@@ -84,7 +87,83 @@ The `+1` represents the passenger themselves.
 0 = Passenger was travelling with family
 ```
 
-These features will be used later during the exploratory analysis.
+These features are used in the exploratory analysis to look for differences in survival.
+
+## Exploratory Data Analysis
+
+The EDA is split into univariate, outlier, bivariate, and multivariate analysis.
+
+### Univariate Analysis
+
+The following distributions were explored:
+
+- Passenger age
+- Passenger fare
+- Passenger class
+
+### Outlier Analysis
+
+Possible outliers were checked for `Age` and `Fare` using boxplots and the IQR method.
+
+The possible outliers were flagged but not removed because unusual values can still represent real passengers and are not necessarily data errors.
+
+### Bivariate Analysis
+
+Survival rates were compared by:
+
+- Sex
+- Passenger class
+- Family size
+
+### Multivariate Analysis
+
+A correlation heatmap was created to look at relationships between the numerical variables.
+
+A separate visualization also compares survival by both sex and passenger class.
+
+## Visualizations
+
+The notebook creates 10 visualizations. Each one is saved as a PNG file in the `images` folder.
+
+### Age Distribution
+
+![Age Distribution](images/01_age_distribution.png)
+
+### Fare Distribution
+
+![Fare Distribution](images/02_fare_distribution.png)
+
+### Passengers by Class
+
+![Passengers by Class](images/03_passengers_by_class.png)
+
+### Age Boxplot
+
+![Age Boxplot](images/04_age_boxplot.png)
+
+### Fare Boxplot
+
+![Fare Boxplot](images/05_fare_boxplot.png)
+
+### Survival Rate by Sex
+
+![Survival Rate by Sex](images/06_survival_by_sex.png)
+
+### Survival Rate by Passenger Class
+
+![Survival Rate by Passenger Class](images/07_survival_by_class.png)
+
+### Survival Rate by Family Size
+
+![Survival Rate by Family Size](images/08_survival_by_family_size.png)
+
+### Correlation Heatmap
+
+![Correlation Heatmap](images/09_correlation_heatmap.png)
+
+### Survival Rate by Sex and Class
+
+![Survival Rate by Sex and Class](images/10_survival_by_sex_and_class.png)
 
 ## Dataset
 
@@ -120,6 +199,8 @@ jupyter notebook
 
 Open `Titanic_EDA.ipynb` and run the cells from top to bottom.
 
+The notebook automatically creates the `images` folder and saves each visualization as a PNG file when the visualization cells are run.
+
 ## Tech Stack
 
 - **Python** — Main programming language
@@ -139,20 +220,28 @@ Titanic-Survival-Analysis/
 │   ├── train.csv
 │   └── test.csv
 │
+├── images/
+│   ├── 01_age_distribution.png
+│   ├── 02_fare_distribution.png
+│   ├── 03_passengers_by_class.png
+│   ├── 04_age_boxplot.png
+│   ├── 05_fare_boxplot.png
+│   ├── 06_survival_by_sex.png
+│   ├── 07_survival_by_class.png
+│   ├── 08_survival_by_family_size.png
+│   ├── 09_correlation_heatmap.png
+│   └── 10_survival_by_sex_and_class.png
+│
 ├── Titanic_EDA.ipynb
 │
 └── README.md
 ```
 
-## Project Preview
-
-A screenshot of the final analysis will be added here once the visualizations are completed.
-
-<!-- Screenshot will be added here later -->
-
 ## Results
 
-The final results and key findings will be added after the exploratory analysis and visualizations are completed.
+The exploratory analysis and visualizations are now in place.
+
+The final data-driven insights and conclusions about the main factors associated with passenger survival will be added after the remaining analysis is completed.
 
 ## Author
 
