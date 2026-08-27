@@ -6,7 +6,7 @@
 
 This project looks at the Titanic passenger dataset using Python. The goal is to understand the data, clean it, create useful features, and explore patterns related to passenger survival.
 
-The project covers data profiling, data cleaning, feature engineering, exploratory data analysis, outlier analysis, visualization, and basic statistical analysis.
+The project covers data profiling, data cleaning, feature engineering, exploratory data analysis, outlier analysis, visualization, basic statistical analysis, and final data-driven findings.
 
 ## Current Progress
 
@@ -41,6 +41,7 @@ So far, the project includes:
 - Creating group-by summary tables for sex, passenger class, and family size
 - Creating a correlation matrix
 - Checking correlations with `Survived`
+- Writing data-driven findings based on the analysis
 
 ## Data Cleaning
 
@@ -171,7 +172,7 @@ Each chart is saved as a PNG file in the `images` folder.
 
 ## Basic Statistical Analysis
 
-The analysis also includes some basic statistics to support the patterns shown in the visualizations.
+The analysis also includes basic statistics to support the patterns shown in the visualizations.
 
 ### Summary Statistics
 
@@ -207,7 +208,7 @@ Survival was also compared across passenger classes.
 
 The `FamilySize` feature was used to compare survival rates across different family sizes.
 
-The results show that survival rates were not the same across all family sizes. Smaller family groups generally showed different survival patterns from passengers travelling alone or in larger groups.
+The results show that survival rates were not the same across all family sizes. Smaller family groups showed different survival patterns from passengers travelling alone or in larger groups.
 
 Some larger family-size groups have very small numbers of passengers, so their survival rates should be interpreted carefully.
 
@@ -225,6 +226,50 @@ The strongest numerical relationships with survival in this analysis were:
 - `Age`: **-0.065**
 
 Correlation shows how variables are related to each other. It does not mean that one variable directly caused another.
+
+## Key Findings
+
+Based on the analysis, several clear patterns can be seen in passenger survival.
+
+### 1. Sex was strongly related to survival
+
+Female passengers had a much higher survival rate than male passengers.
+
+The survival rate for females was about **74.20%**, compared with about **18.89%** for males.
+
+### 2. Passenger class was related to survival
+
+Passengers in higher classes generally had higher survival rates.
+
+The survival rate was about **62.96%** for first-class passengers, **47.28%** for second-class passengers, and **24.24%** for third-class passengers.
+
+### 3. Fare had a positive relationship with survival
+
+`Fare` had a positive correlation with `Survived` of about **0.257**.
+
+Passengers who paid higher fares tended to have higher survival rates. This is also related to passenger class, since higher-class passengers generally paid higher fares.
+
+This does not mean that paying a higher fare directly caused a passenger to survive.
+
+### 4. Travelling alone was associated with lower survival
+
+`IsAlone` had a negative correlation with `Survived` of about **-0.203**.
+
+This suggests that passengers travelling alone generally had lower survival compared with passengers travelling with family.
+
+### 5. Age had a weak relationship with survival
+
+`Age` had a correlation of about **-0.065** with `Survived`.
+
+This is a relatively weak relationship, so age alone did not show a strong linear relationship with survival in this analysis.
+
+### 6. Family size showed different survival patterns
+
+Survival rates were not the same across all family sizes.
+
+Passengers travelling with smaller family groups showed different survival patterns from passengers travelling alone or in larger groups.
+
+Some larger family-size groups contained very few passengers, so their survival rates should be interpreted carefully.
 
 ## Dataset
 
@@ -300,9 +345,9 @@ Titanic-Survival-Analysis/
 
 ## Results
 
-The project now includes the main data cleaning, feature engineering, EDA, visualization, and basic statistical analysis required for the first stage of the internship task.
+The project now covers the main data cleaning, feature engineering, EDA, visualization, statistical analysis, and data-driven findings required for the first stage of the internship task.
 
-The final step is to turn these results into at least five clear, data-driven insights about the factors associated with passenger survival.
+The analysis shows that sex and passenger class had some of the clearest relationships with survival, while fare, travelling alone, and family size also showed useful patterns. Age had a much weaker relationship with survival in this analysis.
 
 ## Author
 
