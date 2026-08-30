@@ -4,74 +4,63 @@
 
 ## About the Project
 
-This project uses the Titanic passenger dataset to understand the data and build a machine learning model to predict survival.
+This project explores the Titanic passenger data and builds a machine learning workflow to predict survival.
 
-The work is split into two parts:
-
-- Exploratory Data Analysis
-- Machine Learning
+The work is divided into two main parts: exploratory data analysis and machine learning. The EDA focuses on understanding and cleaning the data, while the ML stage uses the cleaned understanding of the data to build and compare prediction models.
 
 ## Current Progress
 
 ### Exploratory Data Analysis
 
-The EDA phase includes:
+The EDA covers data profiling, missing-value checks, cleaning, duplicate checks, feature engineering, outlier analysis, group-by analysis, correlation analysis, and the main findings from the data. It also includes 10 visualizations covering different aspects of the dataset.
 
-- Data profiling
-- Missing-value checks
-- Data cleaning
-- Duplicate checks
-- Feature engineering
-- Outlier analysis
-- 10 visualizations
-- Group-by analysis
-- Correlation analysis
-- Key findings
+The cleaned dataset from the EDA stage is saved as:
 
-The cleaned EDA dataset is saved as `data/titanic_cleaned.csv`.
+```text
+data/titanic_cleaned.csv
+```
 
 ### Machine Learning
 
-The ML phase currently covers the first two parts of the workflow.
+The ML stage currently covers feature engineering, leakage-free preprocessing, and comparison of three classification models.
 
-Feature engineering was completed using the original `train.csv` and `test.csv` data. The notebook creates:
+The following features were created from the original `train.csv` and `test.csv` files:
 
-- `Title`
-- `FamilySize`
-- `IsAlone`
-- `AgeBin`
-- `FareBin`
-- `Deck`
-- `CabinKnown`
+```text
+Title
+FamilySize
+IsAlone
+AgeBin
+FareBin
+Deck
+CabinKnown
+```
 
-A leakage-free preprocessing setup has also been added.
+The preprocessing is handled using `Pipeline` and `ColumnTransformer`. Numerical columns go through median imputation and standard scaling, while categorical columns use most-frequent imputation followed by one-hot encoding.
 
-The preprocessing uses:
+Keeping these steps inside the pipeline means that, during cross-validation, the preprocessing is fitted separately using only the training portion of each fold.
 
-- `Pipeline`
-- `ColumnTransformer`
-- Median imputation for numerical columns
-- Most-frequent imputation for categorical columns
-- `StandardScaler` for numerical columns
-- `OneHotEncoder` for categorical columns
+### Model Comparison
 
-The preprocessing is fitted as part of the model pipeline using the training data. The validation data is only transformed after the preprocessing has been fitted.
+Three models are currently being compared using the same preprocessing setup:
 
-The pipeline was also checked with stratified cross-validation. Because the preprocessing is inside the pipeline, each fold fits its own imputer, scaler, and encoder using that fold's training portion only.
+- Logistic Regression
+- Random Forest
+- Gradient Boosting
 
-A Logistic Regression pipeline has been used as the first check that the preprocessing and model work together.
-
-The remaining ML work will cover model comparison, tuning, calibration, and model interpretation.
+The comparison uses 5-fold stratified cross-validation with accuracy, ROC-AUC, and F1 score. The mean result across the five folds is used when comparing the models.
 
 ## Dataset
 
-The project uses the Kaggle Titanic dataset:
+The project uses the Kaggle Titanic dataset. The `data` folder contains the original training and test files along with the cleaned dataset from the EDA stage.
 
-- `train.csv` — contains passenger information and the `Survived` target
-- `test.csv` — contains passenger information without the `Survived` target
-- `titanic_cleaned.csv` — cleaned training data produced during the EDA phase
+```text
+train.csv
+test.csv
+titanic_cleaned.csv
+```
 
-The files are stored in the `data` folder.
+`train.csv` contains the `Survived` target, while `test.csv` does not. The cleaned file was produced during the EDA stage.
 
 ## Project Structure
 
@@ -96,27 +85,27 @@ titanic-survival-analysis/
 
 ### Titanic_EDA.ipynb
 
-This notebook focuses on understanding and cleaning the data, followed by exploratory and statistical analysis.
+The EDA notebook covers the initial data checks, cleaning, feature engineering, visualizations, and analysis of the main survival patterns.
 
 ### Titanic_ML.ipynb
 
-This notebook focuses on feature engineering, leakage-free preprocessing, and the rest of the machine learning workflow.
+The ML notebook continues with feature engineering, preprocessing, cross-validation, and comparison of the three models.
 
 ## Getting Started
 
-Install the main libraries with:
+The project uses Python and the following libraries:
 
 ```bash
 pip install pandas numpy matplotlib seaborn scikit-learn jupyter
 ```
 
-Start Jupyter Notebook:
+Jupyter Notebook can then be started with:
 
 ```bash
 jupyter notebook
 ```
 
-Then run the notebooks from top to bottom.
+The notebooks should be run from top to bottom.
 
 ## Tech Stack
 
@@ -131,9 +120,11 @@ Then run the notebooks from top to bottom.
 
 ## Results
 
-The EDA found clear differences in survival by sex and passenger class. Fare and travelling alone also showed useful relationships with survival, while age had a much weaker linear relationship.
+The EDA shows clear differences in survival by sex and passenger class. Fare and travelling alone also show useful relationships with survival, while age has a much weaker linear relationship.
 
-The ML model results will be added as the remaining model comparison and evaluation steps are completed.
+The ML stage currently provides a baseline comparison of Logistic Regression, Random Forest, and Gradient Boosting using 5-fold stratified cross-validation. The detailed scores are available in the notebook.
+
+The next stage is hyperparameter tuning and final model selection.
 
 ## Author
 
