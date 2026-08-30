@@ -4,7 +4,7 @@
 
 This project uses the Titanic passenger dataset to understand the data and build a machine learning workflow for survival prediction.
 
-The project currently covers the completed EDA work and the first part of the machine learning work.
+The EDA work is complete, and the ML workflow is now moving through feature engineering and preprocessing.
 
 ## EDA Summary
 
@@ -76,9 +76,9 @@ They were not automatically removed because an unusual value is not necessarily 
 
 ## Machine Learning Progress
 
-The ML notebook is now in the feature-engineering stage.
+### Feature Engineering
 
-The following features have been created from the original `train.csv` and `test.csv`:
+The ML notebook creates the following features from the original training and test data:
 
 - `Title`
 - `FamilySize`
@@ -88,24 +88,42 @@ The following features have been created from the original `train.csv` and `test
 - `Deck`
 - `CabinKnown`
 
-Missing values have not been manually filled in the ML notebook at this stage. They will be handled later inside the preprocessing pipeline so that the preprocessing can be fitted only on the appropriate training data.
+### Leakage-Free Preprocessing
+
+The ML notebook now uses a scikit-learn `Pipeline` and `ColumnTransformer`.
+
+Numerical columns are processed with:
+
+- Median imputation
+- Standard scaling
+
+Categorical columns are processed with:
+
+- Most-frequent imputation
+- One-hot encoding
+
+The preprocessing is kept inside the model pipeline. It is fitted using the training data and then used to transform validation data.
+
+This means the validation data does not provide the values used to calculate the imputation statistics, scaling parameters, or category encoding.
+
+The pipeline was also checked with stratified cross-validation. Each fold fits the preprocessing on its own training portion before transforming that fold's validation portion.
+
+A Logistic Regression pipeline has also been fitted as the first check of the preprocessing workflow.
 
 ## Next ML Steps
 
 The remaining ML workflow will cover:
 
-1. Train-test split
-2. Leakage-free preprocessing
-3. Baseline models
-4. Stratified cross-validation
-5. Model comparison
-6. Hyperparameter tuning
-7. Final model selection
-8. Calibration
-9. Permutation importance
-10. SHAP analysis
-11. Model card
-12. Final model artifact
+1. Baseline model comparison
+2. Stratified cross-validation
+3. Model comparison using accuracy, ROC-AUC, and F1
+4. Hyperparameter tuning
+5. Final model selection
+6. Calibration check
+7. Permutation importance
+8. SHAP analysis
+9. Model card
+10. Final model artifact
 
 ## Output
 
@@ -113,7 +131,7 @@ The EDA phase exports:
 
 `data/titanic_cleaned.csv`
 
-The ML phase will add its model outputs after training and evaluation are complete.
+The ML model outputs will be added after the remaining training and evaluation steps are complete.
 
 ## Note
 

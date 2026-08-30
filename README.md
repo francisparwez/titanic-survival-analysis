@@ -4,9 +4,9 @@
 
 ## About the Project
 
-This project uses the Titanic passenger dataset to understand the data, find patterns in survival, and build a machine learning model to predict survival.
+This project uses the Titanic passenger dataset to understand the data and build a machine learning model to predict survival.
 
-The project is being completed in two main parts:
+The work is split into two parts:
 
 - Exploratory Data Analysis
 - Machine Learning
@@ -32,21 +32,36 @@ The cleaned EDA dataset is saved as `data/titanic_cleaned.csv`.
 
 ### Machine Learning
 
-The machine learning phase has started.
+The ML phase currently covers the first two parts of the workflow.
 
-So far, the notebook includes:
+Feature engineering was completed using the original `train.csv` and `test.csv` data. The notebook creates:
 
-- Loading the original training and test data
-- Initial data checks
-- Extracting `Title` from `Name`
-- Creating `FamilySize`
-- Creating `IsAlone`
-- Creating `AgeBin`
-- Creating `FareBin`
-- Extracting `Deck` from `Cabin`
-- Creating `CabinKnown`
+- `Title`
+- `FamilySize`
+- `IsAlone`
+- `AgeBin`
+- `FareBin`
+- `Deck`
+- `CabinKnown`
 
-The next part of the ML work will cover preprocessing, model training, cross-validation, tuning, evaluation, calibration, and model interpretation.
+A leakage-free preprocessing setup has also been added.
+
+The preprocessing uses:
+
+- `Pipeline`
+- `ColumnTransformer`
+- Median imputation for numerical columns
+- Most-frequent imputation for categorical columns
+- `StandardScaler` for numerical columns
+- `OneHotEncoder` for categorical columns
+
+The preprocessing is fitted as part of the model pipeline using the training data. The validation data is only transformed after the preprocessing has been fitted.
+
+The pipeline was also checked with stratified cross-validation. Because the preprocessing is inside the pipeline, each fold fits its own imputer, scaler, and encoder using that fold's training portion only.
+
+A Logistic Regression pipeline has been used as the first check that the preprocessing and model work together.
+
+The remaining ML work will cover model comparison, tuning, calibration, and model interpretation.
 
 ## Dataset
 
@@ -85,7 +100,7 @@ This notebook focuses on understanding and cleaning the data, followed by explor
 
 ### Titanic_ML.ipynb
 
-This notebook focuses on turning the passenger data into useful features and building the machine learning workflow.
+This notebook focuses on feature engineering, leakage-free preprocessing, and the rest of the machine learning workflow.
 
 ## Getting Started
 
@@ -118,7 +133,7 @@ Then run the notebooks from top to bottom.
 
 The EDA found clear differences in survival by sex and passenger class. Fare and travelling alone also showed useful relationships with survival, while age had a much weaker linear relationship.
 
-The machine learning results will be added after model training and evaluation are complete.
+The ML model results will be added as the remaining model comparison and evaluation steps are completed.
 
 ## Author
 
