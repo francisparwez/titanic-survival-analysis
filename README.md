@@ -22,7 +22,7 @@ data/titanic_cleaned.csv
 
 ### Machine Learning
 
-The ML stage currently covers feature engineering, leakage-free preprocessing, and comparison of three classification models.
+The ML stage now covers feature engineering, leakage-free preprocessing, model comparison, hyperparameter tuning, and a calibration check.
 
 The following features were created from the original `train.csv` and `test.csv` files:
 
@@ -42,13 +42,21 @@ Keeping these steps inside the pipeline means that, during cross-validation, the
 
 ### Model Comparison
 
-Three models are currently being compared using the same preprocessing setup:
+Three models are compared using the same preprocessing setup:
 
 - Logistic Regression
 - Random Forest
 - Gradient Boosting
 
 The comparison uses 5-fold stratified cross-validation with accuracy, ROC-AUC, and F1 score. The mean result across the five folds is used when comparing the models.
+
+### Hyperparameter Tuning
+
+After the baseline comparison, GridSearchCV is used to tune the main settings for all three models. The search uses the same pipelines, so preprocessing remains inside each cross-validation fold.
+
+The tuned models are then checked on the validation set using accuracy, ROC-AUC, and F1. The final model is selected by looking at all three metrics rather than relying on accuracy alone.
+
+A calibration check is also included for the selected model. The validation results include a Brier score and a calibration plot to check the quality of the predicted probabilities.
 
 ## Dataset
 
@@ -62,24 +70,55 @@ titanic_cleaned.csv
 
 `train.csv` contains the `Survived` target, while `test.csv` does not. The cleaned file was produced during the EDA stage.
 
-## Project Structure
+## Visualizations
 
-```text
-titanic-survival-analysis/
-│
-├── data/
-│   ├── train.csv
-│   ├── test.csv
-│   └── titanic_cleaned.csv
-│
-├── images/
-│   └── EDA visualizations
-│
-├── Titanic_EDA.ipynb
-├── Titanic_ML.ipynb
-├── SUMMARY.md
-└── README.md
-```
+The notebook contains **10 visualizations**, which is above the required minimum of 8.
+
+Each chart is saved as a PNG file in the `images` folder.
+
+### 1. Age Distribution
+
+![Age Distribution](images/01_age_distribution.png)
+
+### 2. Fare Distribution
+
+![Fare Distribution](images/02_fare_distribution.png)
+
+### 3. Passengers by Class
+
+![Passengers by Class](images/03_passengers_by_class.png)
+
+### 4. Age Boxplot
+
+![Age Boxplot](images/04_age_boxplot.png)
+
+### 5. Fare Boxplot
+
+![Fare Boxplot](images/05_fare_boxplot.png)
+
+### 6. Survival Rate by Sex
+
+![Survival Rate by Sex](images/06_survival_by_sex.png)
+
+### 7. Survival Rate by Passenger Class
+
+![Survival Rate by Passenger Class](images/07_survival_by_class.png)
+
+### 8. Survival Rate by Family Size
+
+![Survival Rate by Family Size](images/08_survival_by_family_size.png)
+
+### 9. Correlation Heatmap
+
+![Correlation Heatmap](images/09_correlation_heatmap.png)
+
+### 10. Survival Rate by Sex and Class
+
+![Survival Rate by Sex and Class](images/10_survival_by_sex_and_class.png)
+
+### 11. Calibration Check
+
+![Calibration Check](images/11_calibration_check.png)
 
 ## Notebooks
 
@@ -89,7 +128,7 @@ The EDA notebook covers the initial data checks, cleaning, feature engineering, 
 
 ### Titanic_ML.ipynb
 
-The ML notebook continues with feature engineering, preprocessing, cross-validation, and comparison of the three models.
+The ML notebook continues with feature engineering, preprocessing, cross-validation, model comparison, hyperparameter tuning, and calibration.
 
 ## Getting Started
 
@@ -118,13 +157,44 @@ The notebooks should be run from top to bottom.
 - Jupyter Notebook
 - Git & GitHub
 
+## Project Structure
+
+```text
+titanic-survival-analysis/
+│
+├── data/
+│   ├── train.csv
+│   ├── test.csv
+│   └── titanic_cleaned.csv
+│
+├── images/
+│   ├── 01_age_distribution.png
+│   ├── 02_fare_distribution.png
+│   ├── 03_passengers_by_class.png
+│   ├── 04_age_boxplot.png
+│   ├── 05_fare_boxplot.png
+│   ├── 06_survival_by_sex.png
+│   ├── 07_survival_by_class.png
+│   ├── 08_survival_by_family_size.png
+│   ├── 09_correlation_heatmap.png
+│   ├── 10_survival_by_sex_and_class.png
+│   └── 11_calibration_check.png
+│
+├── Titanic_EDA.ipynb
+├── Titanic_ML.ipynb
+├── SUMMARY.md
+└── README.md
+```
+
 ## Results
 
 The EDA shows clear differences in survival by sex and passenger class. Fare and travelling alone also show useful relationships with survival, while age has a much weaker linear relationship.
 
-The ML stage currently provides a baseline comparison of Logistic Regression, Random Forest, and Gradient Boosting using 5-fold stratified cross-validation. The detailed scores are available in the notebook.
+The ML stage now compares Logistic Regression, Random Forest, and Gradient Boosting using 5-fold stratified cross-validation. The models are then tuned with GridSearchCV and checked using accuracy, ROC-AUC, and F1.
 
-The next stage is hyperparameter tuning and final model selection.
+The final model is selected from the validation results and then checked for probability calibration. The detailed scores and calibration plot are available in the notebook.
+
+The next stage is model interpretation using permutation importance and SHAP.
 
 ## Author
 
