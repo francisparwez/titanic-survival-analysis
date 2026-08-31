@@ -58,6 +58,14 @@ The tuned models are then checked on the validation set using accuracy, ROC-AUC,
 
 A calibration check is also included for the selected model. The validation results include a Brier score and a calibration plot to check the quality of the predicted probabilities.
 
+### Model Interpretation
+
+The selected model is also interpreted using permutation importance and SHAP.
+
+Permutation importance shows which original features have the biggest effect on validation ROC-AUC, while SHAP gives more detail on how the transformed features contribute to the model's predictions.
+
+The interpretation plots are saved in the `images` folder.
+
 ## Dataset
 
 The project uses the Kaggle Titanic dataset. The `data` folder contains the original training and test files along with the cleaned dataset from the EDA stage.
@@ -72,7 +80,7 @@ titanic_cleaned.csv
 
 ## Visualizations
 
-The notebook contains **10 visualizations**, which is above the required minimum of 8.
+The project contains 10 EDA visualizations, along with a calibration plot and three model interpretation plots.
 
 Each chart is saved as a PNG file in the `images` folder.
 
@@ -120,6 +128,18 @@ Each chart is saved as a PNG file in the `images` folder.
 
 ![Calibration Check](images/11_calibration_check.png)
 
+### 12. Permutation Importance
+
+![Permutation Importance](images/12_permutation_importance.png)
+
+### 13. SHAP Feature Importance
+
+![SHAP Feature Importance](images/13_shap_feature_importance.png)
+
+### 14. SHAP Summary
+
+![SHAP Summary](images/14_shap_summary.png)
+
 ## Notebooks
 
 ### Titanic_EDA.ipynb
@@ -128,14 +148,14 @@ The EDA notebook covers the initial data checks, cleaning, feature engineering, 
 
 ### Titanic_ML.ipynb
 
-The ML notebook continues with feature engineering, preprocessing, cross-validation, model comparison, hyperparameter tuning, and calibration.
+The ML notebook covers feature engineering, leakage-free preprocessing, cross-validation, model comparison, hyperparameter tuning, calibration, permutation importance, and SHAP analysis.
 
 ## Getting Started
 
 The project uses Python and the following libraries:
 
 ```bash
-pip install pandas numpy matplotlib seaborn scikit-learn jupyter
+pip install pandas numpy matplotlib seaborn scikit-learn shap jupyter
 ```
 
 Jupyter Notebook can then be started with:
@@ -154,6 +174,7 @@ The notebooks should be run from top to bottom.
 - Matplotlib
 - Seaborn
 - Scikit-learn
+- SHAP
 - Jupyter Notebook
 - Git & GitHub
 
@@ -178,7 +199,10 @@ titanic-survival-analysis/
 │   ├── 08_survival_by_family_size.png
 │   ├── 09_correlation_heatmap.png
 │   ├── 10_survival_by_sex_and_class.png
-│   └── 11_calibration_check.png
+│   ├── 11_calibration_check.png
+│   ├── 12_permutation_importance.png
+│   ├── 13_shap_feature_importance.png
+│   └── 14_shap_summary.png
 │
 ├── Titanic_EDA.ipynb
 ├── Titanic_ML.ipynb
@@ -190,11 +214,18 @@ titanic-survival-analysis/
 
 The EDA shows clear differences in survival by sex and passenger class. Fare and travelling alone also show useful relationships with survival, while age has a much weaker linear relationship.
 
-The ML stage now compares Logistic Regression, Random Forest, and Gradient Boosting using 5-fold stratified cross-validation. The models are then tuned with GridSearchCV and checked using accuracy, ROC-AUC, and F1.
+The ML stage compares Logistic Regression, Random Forest, and Gradient Boosting using 5-fold stratified cross-validation. The models are then tuned with GridSearchCV and checked using accuracy, ROC-AUC, and F1.
 
-The final model is selected from the validation results and then checked for probability calibration. The detailed scores and calibration plot are available in the notebook.
+Logistic Regression was selected as the final model based on the overall validation results. Its validation results were:
 
-The next stage is model interpretation using permutation importance and SHAP.
+- Accuracy: 0.8156
+- ROC-AUC: 0.8626
+- F1: 0.7519
+- Brier Score: 0.1367
+
+The final model was also checked using a calibration plot, permutation importance, and SHAP analysis.
+
+The next step is to document the final model and save the trained pipeline as a reusable model artifact.
 
 ## Author
 

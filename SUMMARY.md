@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This project started with an exploratory analysis of the Titanic passenger data and has now moved into the machine learning stage. The EDA work is complete, and the ML notebook covers feature engineering, leakage-free preprocessing, model comparison, hyperparameter tuning, and a calibration check.
+This project started with an exploratory analysis of the Titanic passenger data and then moved into the machine learning stage. The EDA work is complete, and the ML notebook now covers feature engineering, leakage-free preprocessing, model comparison, hyperparameter tuning, calibration, permutation importance, and SHAP analysis.
 
 ## EDA Summary
 
@@ -54,9 +54,17 @@ A calibration check is then run on the selected model. The notebook reports accu
 
 This gives a final check of both the model's classification performance and its predicted probabilities.
 
+### Model Interpretation
+
+The selected model is also interpreted using permutation importance and SHAP.
+
+Permutation importance is calculated on the validation set and shows how much the model's ROC-AUC changes when an original feature is shuffled.
+
+SHAP is applied to the selected Logistic Regression model after preprocessing. The SHAP plots show which transformed features contribute most to the predictions.
+
 ## Next Steps
 
-The next part of the ML work will focus on understanding the final model. This will include permutation importance and SHAP analysis, followed by a short model card and the final model artifact.
+The next part of the ML work will document the final model, its assumptions and limitations, and save the trained pipeline as a reusable model artifact.
 
 ## Output
 
@@ -68,4 +76,15 @@ data/titanic_cleaned.csv
 
 The ML notebook now produces baseline model results, tuned model results, final model selection results, and a calibration check.
 
-The actual scores are generated when the notebook is run.
+### Final Model
+
+Logistic Regression was selected as the final model after comparing the tuned models using accuracy, ROC-AUC, and F1.
+
+The validation results were:
+
+- Accuracy: 0.8156
+- ROC-AUC: 0.8626
+- F1: 0.7519
+- Brier Score: 0.1367
+
+The final model was also checked using a calibration plot, permutation importance, and SHAP analysis.
