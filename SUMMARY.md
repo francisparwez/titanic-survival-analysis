@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This project started with an exploratory analysis of the Titanic passenger data and then moved into the machine learning stage. The EDA work is complete, and the ML notebook now covers feature engineering, leakage-free preprocessing, model comparison, hyperparameter tuning, calibration, permutation importance, and SHAP analysis.
+This project started with an exploratory analysis of the Titanic passenger data and then moved into the machine learning stage. The EDA work is complete, and the ML notebook now covers feature engineering, leakage-free preprocessing, model comparison, hyperparameter tuning, calibration, permutation importance, SHAP analysis, and saving the final model.
 
 ## EDA Summary
 
@@ -36,35 +36,59 @@ Three models are compared using the same preprocessing setup:
 2. Random Forest
 3. Gradient Boosting
 
-The comparison uses 5-fold stratified cross-validation and looks at accuracy, ROC-AUC, and F1 score. The mean scores across the five folds are used for the baseline comparison.
+The comparison uses 5-fold stratified cross-validation and looks at accuracy, ROC-AUC, and F1 score.
 
 ### Hyperparameter Tuning
 
-After the baseline comparison, GridSearchCV is used to test a small set of parameter combinations for each model.
+GridSearchCV is used to test parameter combinations for each model. The search keeps preprocessing inside each pipeline during the cross-validation folds.
 
-The tuning is done on the training data using 5-fold cross-validation. The preprocessing remains inside each pipeline during the search, so the imputation and encoding are not fitted on the validation data.
-
-The best version of each model is then checked on the held-out validation set using accuracy, ROC-AUC, and F1.
+The tuned models are then checked on the held-out validation set using accuracy, ROC-AUC, and F1.
 
 ### Final Model and Calibration
 
-The final model is selected by looking at the three validation metrics together rather than choosing the model from accuracy alone.
+Logistic Regression was selected as the final model based on the overall validation results.
 
-A calibration check is then run on the selected model. The notebook reports accuracy, ROC-AUC, F1, and Brier score and also includes a calibration plot.
+The validation results were:
 
-This gives a final check of both the model's classification performance and its predicted probabilities.
+- Accuracy: 0.8156
+- ROC-AUC: 0.8625
+- F1: 0.7519
+
+The calibrated version produced a Brier Score of 0.1365, and the calibration plot was saved in the `images` folder.
 
 ### Model Interpretation
 
-The selected model is also interpreted using permutation importance and SHAP.
+The selected model was interpreted using permutation importance and SHAP.
 
-Permutation importance is calculated on the validation set and shows how much the model's ROC-AUC changes when an original feature is shuffled.
+Permutation importance was calculated on the validation set and showed the largest ROC-AUC impact from `Sex`, `Title`, `Pclass`, and `Age`.
 
-SHAP is applied to the selected Logistic Regression model after preprocessing. The SHAP plots show which transformed features contribute most to the predictions.
+SHAP was applied to the selected Logistic Regression model after preprocessing. The strongest transformed features in the SHAP results included `Title_Mr`, `Pclass`, `Sex_female`, `Sex_male`, `CabinKnown`, and `Age`.
 
-## Next Steps
+The interpretation plots are saved in the `images` folder.
 
-The next part of the ML work will document the final model, its assumptions and limitations, and save the trained pipeline as a reusable model artifact.
+### Model Card and Reproducibility
+
+A short model card is included in the final section of the ML notebook. It records the model, objective, features, preprocessing, expected performance, assumptions, and limitations.
+
+The final calibrated pipeline is saved as:
+
+```text
+artifacts/titanic_survival_model.joblib
+```
+
+The saved file contains the preprocessing and model together so the same pipeline can be loaded and reused.
+
+## Final Model
+
+Logistic Regression was selected as the final model after comparing the tuned models using accuracy, ROC-AUC, and F1.
+
+The held-out validation results before calibration were:
+
+- Accuracy: 0.8156
+- ROC-AUC: 0.8625
+- F1: 0.7519
+
+After calibration, the Brier Score was 0.1365 and ROC-AUC was 0.8622.
 
 ## Output
 
@@ -74,17 +98,10 @@ The EDA stage produces:
 data/titanic_cleaned.csv
 ```
 
-The ML notebook now produces baseline model results, tuned model results, final model selection results, and a calibration check.
+The ML stage now produces model comparison results, tuned model results, calibration and interpretation plots, a model card, and a saved model artifact.
 
-### Final Model
+The final model is saved as:
 
-Logistic Regression was selected as the final model after comparing the tuned models using accuracy, ROC-AUC, and F1.
-
-The validation results were:
-
-- Accuracy: 0.8156
-- ROC-AUC: 0.8626
-- F1: 0.7519
-- Brier Score: 0.1367
-
-The final model was also checked using a calibration plot, permutation importance, and SHAP analysis.
+```text
+artifacts/titanic_survival_model.joblib
+```

@@ -22,7 +22,7 @@ data/titanic_cleaned.csv
 
 ### Machine Learning
 
-The ML stage now covers feature engineering, leakage-free preprocessing, model comparison, hyperparameter tuning, and a calibration check.
+The ML stage now covers feature engineering, leakage-free preprocessing, model comparison, hyperparameter tuning, calibration, model interpretation, and saving the final model.
 
 The following features were created from the original `train.csv` and `test.csv` files:
 
@@ -58,6 +58,18 @@ The tuned models are then checked on the validation set using accuracy, ROC-AUC,
 
 A calibration check is also included for the selected model. The validation results include a Brier score and a calibration plot to check the quality of the predicted probabilities.
 
+### Final Model and Calibration
+
+Logistic Regression was selected as the final model based on the overall validation results.
+
+The validation results were:
+
+- Accuracy: 0.8156
+- ROC-AUC: 0.8625
+- F1: 0.7519
+
+The calibrated version of the final model produced a Brier Score of 0.1365 and a ROC-AUC of 0.8622. The calibration plot is saved in the `images` folder.
+
 ### Model Interpretation
 
 The selected model is also interpreted using permutation importance and SHAP.
@@ -65,6 +77,18 @@ The selected model is also interpreted using permutation importance and SHAP.
 Permutation importance shows which original features have the biggest effect on validation ROC-AUC, while SHAP gives more detail on how the transformed features contribute to the model's predictions.
 
 The interpretation plots are saved in the `images` folder.
+
+### Model Card and Saved Model
+
+A short model card is included in the ML notebook. It records the model, objective, features, preprocessing, expected performance, assumptions, and limitations.
+
+The final calibrated pipeline is saved as:
+
+```text
+artifacts/titanic_survival_model.joblib
+```
+
+The saved artifact contains the preprocessing and model together so it can be loaded and reused later.
 
 ## Dataset
 
@@ -148,14 +172,14 @@ The EDA notebook covers the initial data checks, cleaning, feature engineering, 
 
 ### Titanic_ML.ipynb
 
-The ML notebook covers feature engineering, leakage-free preprocessing, cross-validation, model comparison, hyperparameter tuning, calibration, permutation importance, and SHAP analysis.
+The ML notebook covers feature engineering, leakage-free preprocessing, cross-validation, model comparison, hyperparameter tuning, calibration, permutation importance, SHAP analysis, the model card, and saving the final model.
 
 ## Getting Started
 
 The project uses Python and the following libraries:
 
 ```bash
-pip install pandas numpy matplotlib seaborn scikit-learn shap jupyter
+pip install pandas numpy matplotlib seaborn scikit-learn shap joblib jupyter
 ```
 
 Jupyter Notebook can then be started with:
@@ -204,6 +228,9 @@ titanic-survival-analysis/
 │   ├── 13_shap_feature_importance.png
 │   └── 14_shap_summary.png
 │
+├── artifacts/
+│   └── titanic_survival_model.joblib
+│
 ├── Titanic_EDA.ipynb
 ├── Titanic_ML.ipynb
 ├── SUMMARY.md
@@ -216,16 +243,17 @@ The EDA shows clear differences in survival by sex and passenger class. Fare and
 
 The ML stage compares Logistic Regression, Random Forest, and Gradient Boosting using 5-fold stratified cross-validation. The models are then tuned with GridSearchCV and checked using accuracy, ROC-AUC, and F1.
 
-Logistic Regression was selected as the final model based on the overall validation results. Its validation results were:
+Logistic Regression was selected as the final model. On the held-out validation set it achieved:
 
 - Accuracy: 0.8156
-- ROC-AUC: 0.8626
+- ROC-AUC: 0.8625
 - F1: 0.7519
-- Brier Score: 0.1367
 
-The final model was also checked using a calibration plot, permutation importance, and SHAP analysis.
+After calibration, the Brier Score was 0.1365 & ROC-AUC at 0.8622.
 
-The next step is to document the final model and save the trained pipeline as a reusable model artifact.
+The final model was also checked using permutation importance and SHAP. The main interpretation results are saved as images in the `images` folder.
+
+The trained calibrated pipeline is saved as `artifacts/titanic_survival_model.joblib`.
 
 ## Author
 
